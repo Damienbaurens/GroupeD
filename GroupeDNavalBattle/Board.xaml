@@ -1,0 +1,148 @@
+﻿<Page
+    x:Class="GroupeDNavalBattle.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GroupeDNavalBattle"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1080" Width="1920">
+
+    <Grid x:Name="NavalBattleD" Visibility="Visible" Margin="0,0,0,0" Width="1920" Height="1080">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Border x:Name="leftBorder" BorderThickness="0,0,1,1" BorderBrush="Black" Width="120" HorizontalAlignment="Left" Height="943" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <CompositeTransform SkewY="0" TranslateY="0"/>
+            </Border.RenderTransform>
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF91D7FF"/>
+                    <GradientStop Color="#FF020E87" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Border x:Name="topBorder" BorderThickness="0,0,1,1" Width="1800" Height="140" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.5" SpreadMethod="Pad">
+                    <LinearGradientBrush.RelativeTransform>
+                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="270"/>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF91D7FF" Offset="0"/>
+                    <GradientStop Color="#FF0E1DB4" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="Title" Text="Naval Battle D" TextWrapping="Wrap" Margin="10,0,-10,0" FontSize="140" FontWeight="Bold" FontStyle="Normal" FontFamily="Brush Script MT" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <Border BorderThickness="0,0,0,0" BorderBrush="Black" Width="120" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF91D7FF"/>
+        
+        <Border x:Name="P1ABorder" BorderThickness="1" BorderBrush="Black" Margin="120,140,1715,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenA" Text="A" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P1BBorder" BorderThickness="1" BorderBrush="Black" Margin="205,140,1630,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenB" Text="B" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="70"/>
+        </Border>
+        <Border x:Name="P1CBorder" BorderThickness="1" BorderBrush="Black" Margin="290,140,1545,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenC" Text="C" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="70" FontFamily="Segoe UI"/>
+        </Border>
+        <Border x:Name="P1DBorder" BorderThickness="1" BorderBrush="Black" Margin="375,140,1460,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenD" Text="D" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P1EBorder" BorderThickness="1" BorderBrush="Black" Margin="460,140,1375,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenE" Text="E" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P1FBorder" BorderThickness="1" BorderBrush="Black" Margin="545,140,1290,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenF" Text="F" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P1GBorder" BorderThickness="1" BorderBrush="Black" Margin="630,140,1205,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenG" Text="G" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P1HBorder" BorderThickness="1" BorderBrush="Black" Margin="715,140,1120,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenH" Text="H" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P1IBorder" BorderThickness="1" BorderBrush="Black" Margin="800,140,1035,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenI" Text="I" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P1JBorder" BorderThickness="1" BorderBrush="Black" Margin="885,140,950,850" Width="85" Background="#FF12A63B">
+            <TextBlock x:Name="GreenJ" Text="J" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        
+        <Border x:Name="P11Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,230,900,765" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P12Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,315,900,680" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P13Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,400,900,595" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P14Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,485,900,510" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P15Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,570,900,425" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P16Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,655,900,340" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P17Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,740,900,255" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P18Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,825,900,170" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P19Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,910,900,85" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="P110Border" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,995,900,0" Height="85" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+
+        <Border x:Name="P21Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,230,850,765" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text1" Text="1" TextWrapping="Wrap" Margin="-22,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P22Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,315,850,680" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text2" Text="2" TextWrapping="Wrap" Margin="-20,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P23Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,400,850,595" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text3" Text="3" TextWrapping="Wrap" Margin="-19,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P25Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,570,850,425" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text4" Text="5" TextWrapping="Wrap" Margin="-20,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P26Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,655,850,340" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text5" Text="6" TextWrapping="Wrap" Margin="-20,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P24Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,485,850,510" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text6" Text="4" TextWrapping="Wrap" Margin="-23,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P28Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,825,850,170" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text7" Text="8" TextWrapping="Wrap" Margin="-19,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P29Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,910,850,85" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text8" Text="9" TextWrapping="Wrap" Margin="-18,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" />
+        </Border>
+        <Border x:Name="P27Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,740,850,255" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text9" Text="7" TextWrapping="Wrap" Margin="-18,0,0,0" FontSize="70" Height="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40"/>
+        </Border>
+        <Border x:Name="P210Border" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,995,850,0" Height="85" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C">
+            <TextBlock x:Name="Text10" Text="10" TextWrapping="Wrap" FontSize="70" Height="85" HorizontalAlignment="Left" VerticalAlignment="Top" Width="83" Margin="-38,-5,0,0"/>
+        </Border>
+        <Border x:Name="P2ABorder" BorderThickness="1" BorderBrush="Black" Margin="1070,140,765,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedA" Text="A" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2BBorder" BorderThickness="1" BorderBrush="Black" Margin="1155,140,680,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedB" Text="B" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2CBorder" BorderThickness="1" BorderBrush="Black" Margin="1240,140,595,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedC" Text="C" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2DBorder" BorderThickness="1" BorderBrush="Black" Margin="1325,140,510,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedD" Text="D" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2EBorder" BorderThickness="1" BorderBrush="Black" Margin="1410,140,425,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedE" Text="E" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2FBorder" BorderThickness="1" BorderBrush="Black" Margin="1495,140,340,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedF" Text="F" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2GBorder" BorderThickness="1" BorderBrush="Black" Margin="1580,140,255,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedG" Text="G" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2HBorder" BorderThickness="1" BorderBrush="Black" Margin="1665,140,170,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedH" Text="H" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2IBorder" BorderThickness="1" BorderBrush="Black" Margin="1750,140,85,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedI" Text="I" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="P2JBorder" BorderThickness="1" BorderBrush="Black" Margin="1835,140,0,850" Width="85" Background="#FFCD1C1C">
+            <TextBlock x:Name="RedJ" Text="J" TextWrapping="Wrap" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal"/>
+        </Border>
+        <Border x:Name="GreenMiddleBorder" BorderThickness="1,1,0,1" BorderBrush="Black" Margin="970,140,900,850" Width="50" UseLayoutRounding="False" Background="#FF12A63B"/>
+        <Border x:Name="RedMiddleBorder" BorderThickness="0,1,1,1" BorderBrush="Black" Margin="1020,140,850,850" Width="50" UseLayoutRounding="False" Background="#FFCD1C1C"/>
+
+
+    </Grid>
+</Page>

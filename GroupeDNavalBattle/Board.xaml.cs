@@ -25,6 +25,22 @@ namespace GroupeDNavalBattle
         public MainPage()
         {
             this.InitializeComponent();
+            for(int p =1; p<3; p++)
+            {
+                for(int x = 1; x < 11; x++)
+                {
+                    for(int y = 1; y < 11; y++)
+                    {
+                        SeaElement createSeaElement = new SeaElement(x, y, p, true);
+                        NavalBattleD.Children.Add(createSeaElement.button);
+                    }
+                }
+            }
+        }
+
+        private void A_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
