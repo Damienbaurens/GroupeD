@@ -31,14 +31,14 @@ namespace GroupeDNavalBattle
 
             while (!finished)
             {
-                curr_player.shoot();
-                if (opponent.boats.Length == 0) { finished = true; }
+                curr_player.shoot(opponent);
+                /*if (opponent.boatList.Length == 0) { finished = true; }
                 else
                 {
                     Player tmpPlayer = curr_player;
                     curr_player = opponent;
                     opponent = tmpPlayer;
-                }
+                }*/
             }
             return curr_player;
         }
