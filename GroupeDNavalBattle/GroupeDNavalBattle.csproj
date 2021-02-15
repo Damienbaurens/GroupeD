@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BrushSet.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="SeaElement.cs" />
     <Compile Include="Board.xaml.cs">
       <DependentUpon>Board.xaml</DependentUpon>

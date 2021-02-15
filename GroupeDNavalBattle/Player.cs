@@ -6,20 +6,11 @@ using System.Threading.Tasks;
 
 namespace GroupeDNavalBattle
 {
-    class Player
+    public abstract class Player
     {
-        //Attributs
-        public Boat[] boats;
-
-        //Constructeur
-
-        //Méthodes
-        public void place() 
-        { 
-        }
-
-        public void shoot()
-        { 
-        }
+        public int id { get; set; }
+        public Boat[] boatList { get; set; }
+        public abstract void shoot( Player opponent);
+        public abstract void place();
     }
 }
