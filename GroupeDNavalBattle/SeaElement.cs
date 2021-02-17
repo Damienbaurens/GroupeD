@@ -11,14 +11,63 @@ namespace GroupeDNavalBattle
     class SeaElement
     {
         //Attributs
-        public Button button { get; set; } //Le { get; set; } permet d'avoir directement le getter et le setter par défaut
-
-        // TODO : Class enum State state { get; set; } 
+        Button button { get; set; } //Le { get; set; } permet d'avoir directement le getter et le setter par défaut
         int posX { get; }
         int posY { get;}
         int player { get; }
         Boolean known { get; set; }
+
+        Boolean _clickable;
+        public Boolean clickable 
+        {
+            get => _clickable;
+           
+            set 
+            {
+                this._clickable = value;
+                if(this._clickable == true)
+                {
+                    this.button.IsEnabled = true;
+                }
+                else
+                {
+                    this.button.IsEnabled = false;
+                }
+            } 
+        }
         String name;
+
+        State _state;
+        public State state
+        {
+            get => _state;
+            set
+            {
+                this._state = value;
+                switch (_state)
+                {
+                    case State.Water:
+                        this.button.Background = BrushSet.waterBrush;
+                        break;
+                    case State.Boat:
+                        this.button.Background = BrushSet.boatBrush;
+                        break;
+                    case State.Touched:
+                        this.button.Background = BrushSet.touchedBrush;
+                        break;
+                    case State.Sunk:
+                        this.button.Background = BrushSet.sunkBrush;
+                        break;
+                    case State.Plouf:
+                        this.button.Background = BrushSet.ploufBrush;
+                        break;
+                    case State.Unknown:
+                        this.button.Background = BrushSet.waterBrush;
+                        break;
+                }
+            }
+        }
+
 
         //Constructeur
         public SeaElement(int posX, int posY, int player, Boolean known)
@@ -55,7 +104,8 @@ namespace GroupeDNavalBattle
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //TODO : faire l'event de pressage du bouton
-            throw new NotImplementedException();
+            ButtonBuffer.setPressedButton(this.button.Name);
         }
+        
     }
 }
