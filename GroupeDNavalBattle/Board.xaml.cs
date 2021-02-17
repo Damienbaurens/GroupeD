@@ -25,6 +25,7 @@ namespace GroupeDNavalBattle
         public MainPage()
         {
             this.InitializeComponent();
+            
             for(int p =1; p<3; p++)
             {
                 for(int x = 1; x < 11; x++)
@@ -36,6 +37,7 @@ namespace GroupeDNavalBattle
                     }
                 }
             }
+            
         }
 
         private void A_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,6 +46,11 @@ namespace GroupeDNavalBattle
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void _4_SelectionChanged(object sender, RoutedEventArgs e)
         {
 
         }

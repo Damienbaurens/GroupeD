@@ -11,7 +11,7 @@ namespace GroupeDNavalBattle
     class SeaElement
     {
         //Attributs
-        Button button { get; set; } //Le { get; set; } permet d'avoir directement le getter et le setter par défaut
+        public Button button { get; set; } //Le { get; set; } permet d'avoir directement le getter et le setter par défaut
         int posX { get; }
         int posY { get;}
         int player { get; }
@@ -83,8 +83,8 @@ namespace GroupeDNavalBattle
             this.button.Content = ""; //bouton vide
 
             // largeur et hauteur du bouton, on les fait carrés pour si on veut mettre des images dessus un jour
-            this.button.Width = 85;
-            this.button.Height = 85;
+            this.button.Width = 50;
+            this.button.Height = 50;
 
             this.button.Background = BrushSet.waterBrush; //couleur de fond du bouton, par défaut c'est de l'eau
             this.button.BorderThickness = new Thickness(1, 1, 1, 1); //épaisseur en pixel de la bordure du bouton
@@ -95,7 +95,7 @@ namespace GroupeDNavalBattle
             this.button.VerticalAlignment = VerticalAlignment.Top;
 
             //position exacte sur le board
-            this.button.Margin = new Thickness(120 + (player - 1) * 950 + (posX - 1) * 85, 230 + (posY - 1) * 85, 0, 0);
+            this.button.Margin = new Thickness(100 + (player - 1) * 580 + (posX - 1) * 50, 135 + (posY - 1) * 50, 0, 0);
 
             //event quand on presse le bouton
             this.button.Click += Button_Click;
@@ -103,7 +103,6 @@ namespace GroupeDNavalBattle
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //TODO : faire l'event de pressage du bouton
             ButtonBuffer.setPressedButton(this.button.Name);
         }
         
