@@ -33,7 +33,15 @@ namespace GroupeDNavalBattle
                 else
                 {
                     this.button.IsEnabled = false;
-                    this.button.Background = BrushSet.unclickableBrush;
+                    switch (this.state)
+                    {
+                        case State.Water:
+                            this.button.Background = BrushSet.unclickableBrush;
+                            break;
+                        default:
+                            break;
+
+                    }
                 }
             } 
         }

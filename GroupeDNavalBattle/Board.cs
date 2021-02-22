@@ -8,5 +8,20 @@ namespace GroupeDNavalBattle
 {
     class Board
     {
+        public List<SeaElement> SeaElementList = new List<SeaElement> { };
+        int player;
+
+        public Board(int player)
+        {
+            for (int x = 1; x < 11; x++)
+            {
+                for (int y = 1; y < 11; y++)
+                {
+                    SeaElement createdSeaElement = new SeaElement(x, y, player, true);
+                    SeaElementList.Add(createdSeaElement);
+                }
+            }
+            this.player = player;
+        }
     }
 }
