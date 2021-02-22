@@ -10,7 +10,7 @@ namespace GroupeDNavalBattle
     {
         public override void shoot(Player opponent)
         { 
-            SeaElement.setState();
+            //SeaElement.setState();
         }
         public override void place(Board board)
         {

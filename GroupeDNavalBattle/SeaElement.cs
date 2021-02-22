@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace GroupeDNavalBattle
 {
-    class SeaElement
+    public class SeaElement
     {
         //Attributs
         public Button button { get; set; } //Le { get; set; } permet d'avoir directement le getter et le setter par défaut

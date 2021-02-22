@@ -123,7 +123,9 @@
     <Compile Include="Boat.cs" />
     <Compile Include="BrushSet.cs" />
     <Compile Include="ButtonBuffer.cs" />
+    <Compile Include="Computer.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="HumanPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="SeaElement.cs" />
     <Compile Include="Interface.xaml.cs">

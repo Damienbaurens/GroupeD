@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupeDNavalBattle
 {
-    class Boat
+    public class Boat
     {
         int size;
     }

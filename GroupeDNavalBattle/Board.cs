@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupeDNavalBattle
 {
-    class Board
+    public class Board
     {
         public List<SeaElement> SeaElementList = new List<SeaElement> { };
         int player;
