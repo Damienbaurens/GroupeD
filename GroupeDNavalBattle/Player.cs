@@ -9,7 +9,7 @@ namespace GroupeDNavalBattle
     public abstract class Player
     {
         public int id { get; set; }
-        //public Boat[] boatList { get; set; }
+        public Boat[] boatList { get; set; }
         public abstract void shoot( Player opponent);
         public abstract void place();
     }

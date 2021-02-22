@@ -8,6 +8,6 @@ namespace GroupeDNavalBattle
 {
     class Boat
     {
-
+        int size;
     }
 }

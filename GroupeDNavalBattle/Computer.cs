@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupeDNavalBattle
 {
-    //class Computer : Player
-    //{
-    //}
+    class Computer : Player
+    {
+    }
 }
