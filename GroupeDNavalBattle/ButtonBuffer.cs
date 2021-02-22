@@ -8,16 +8,16 @@ namespace GroupeDNavalBattle
 {
     static class ButtonBuffer
     {
-        private static String pressedButton;
+        private static SeaElement pressedSeaElement;
 
-        public static String getPressedButton()
+        public static SeaElement getPressedSeaElement()
         {
-            return pressedButton;
+            return pressedSeaElement;
         }
 
-        public static void setPressedButton(String value)
+        public static void setPressedSeaElement(SeaElement value)
         {
-            pressedButton = value;
+            pressedSeaElement = value;
         }
     }
 }
