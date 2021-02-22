@@ -28,10 +28,12 @@ namespace GroupeDNavalBattle
                 if(this._clickable == true)
                 {
                     this.button.IsEnabled = true;
+                    this.state = this.state ;
                 }
                 else
                 {
                     this.button.IsEnabled = false;
+                    this.button.Background = BrushSet.unclickableBrush;
                 }
             } 
         }
