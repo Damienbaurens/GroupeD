@@ -12,9 +12,9 @@ namespace GroupeDNavalBattle
     {
         //Attributs
         public Button button { get; set; } //Le { get; set; } permet d'avoir directement le getter et le setter par défaut
-        int posX { get; }
-        int posY { get;}
-        int player { get; }
+        public int posX { get; }
+        public int posY { get;}
+        public int player { get; }
         Boolean known { get; set; }
 
         Boolean _clickable;

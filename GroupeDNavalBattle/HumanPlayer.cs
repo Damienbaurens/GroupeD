@@ -15,19 +15,19 @@ namespace GroupeDNavalBattle
         public override void place(Board board)
         {
             int nboat = 0;
-            int[10][10] listInterdit;// liste d'élément inclickable strictement
+            int[,] listInterdit= new int[10,10];// liste d'élément inclickable strictement
             while (nboat < this.boatList.Length)
             {
                 Boat currentBoat = this.boatList[nboat];
                 Boolean Horizontal = true;
                 for (int element = 0; element < currentBoat.size; element++)
                 {
-                    SeaElement target = getPressedSeaElement();
+                    SeaElement target = ButtonBuffer.getPressedSeaElement();
                     while (target == null)
                     {
-                        target = getPressedSeaElement();
+                        target = ButtonBuffer.getPressedSeaElement();
                     }
-                    setPressedSeaElement(null);
+                    ButtonBuffer.setPressedSeaElement(null);
                     currentBoat.position[element] = target;
                     if (element == 1)
                     {
@@ -47,7 +47,7 @@ namespace GroupeDNavalBattle
                                     board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable= false;
                                     //rendre tous les élements de non proche en proche non clicable
                                 }
-                                listInterdit[target.posX][target.posY] = 1;
+                                listInterdit[target.posX, target.posY] = 1;
                                 //rendre la case inclicable liste
                             }
                         }
@@ -74,14 +74,14 @@ namespace GroupeDNavalBattle
                             // après avoir verifier que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
                             if (y > 0)
                             {
-                                if(listInterdit[target.posX][target.posY-1] != 1)
+                                if(listInterdit[target.posX, target.posY-1] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x) * 10 + (y - 1)).clickable = true;
                                 }
                             }
                             if (y < 9)
                             {
-                                if (listInterdit[target.posX][target.posY + 1] != 1)
+                                if (listInterdit[target.posX, target.posY + 1] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x) * 10 + (y + 1)).clickable = true;
                                 }
@@ -105,14 +105,14 @@ namespace GroupeDNavalBattle
                             // après avoir verifier que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
                             if (x > 0)
                             {
-                                if (listInterdit[target.posX-1][target.posY] != 1)
+                                if (listInterdit[target.posX-1, target.posY] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x-1) * 10 + (y)).clickable = true;
                                 }
                             }
                             if (x < 9)
                             {
-                                if (listInterdit[target.posX+1][target.posY] != 1)
+                                if (listInterdit[target.posX+1, target.posY] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x+1) * 10 + (y)).clickable = true;
                                 }
@@ -120,7 +120,7 @@ namespace GroupeDNavalBattle
 
                         }
                         //rend l'élément interdit et inclickable
-                        listInterdit[x][y] = 1;
+                        listInterdit[x, y] = 1;
                         board.SeaElementList.ElementAt((x) * 10 + (y)).clickable = false;
                     }
                 }
@@ -133,9 +133,9 @@ namespace GroupeDNavalBattle
                     {
                         for (int j=0; j<3; j++)
                         {
-                            if((0 < x + i < 9) && (0 < y + i < 9))
+                            if((0 < x + i) && (9>x+i) && (0 < y + i) && (9 > y + i))
                             {
-                                listInterdit[x - 1 + i][y - 1 + j] = 1;
+                                listInterdit[x - 1 + i, y - 1 + j] = 1;
                             }
                             
                         }
@@ -146,7 +146,7 @@ namespace GroupeDNavalBattle
                 {
                     for(int l = 0; l < 10; l++)
                     {
-                        if (listInterdit[c][l] != 1)
+                        if (listInterdit[c, l] != 1)
                         {
                             board.SeaElementList.ElementAt((c - 1) * 10 + (l - 1)).clickable = true;
                         }

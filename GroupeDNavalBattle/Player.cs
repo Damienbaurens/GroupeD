@@ -12,5 +12,6 @@ namespace GroupeDNavalBattle
         public Boat[] boatList { get; set; }
         public abstract void shoot( Player opponent);
         public abstract void place(Board board);
+       
     }
 }

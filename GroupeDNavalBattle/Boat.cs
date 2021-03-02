@@ -8,6 +8,7 @@ namespace GroupeDNavalBattle
 {
     public class Boat
     {
-        int size;
+        public int size;
+        public SeaElement [] position;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupeDNavalBattle
 {
-    enum State
+    public enum State
     {
         Water,
         Boat,

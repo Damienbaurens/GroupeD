@@ -22,8 +22,8 @@ namespace GroupeDNavalBattle
         //Méthodes
         public Player Play(Player player1, Player player2, Board board)
         {
-            player1.place();
-            player2.place();
+            player1.place(board);
+            player2.place(board);
 
             bool finished = false;
             Player curr_player = player1;
