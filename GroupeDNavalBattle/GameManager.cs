@@ -20,24 +20,27 @@ namespace GroupeDNavalBattle
         }
 
         //Méthodes
-        public Player Play(Player player1, Player player2, Board board)
+        public Player Play(Player player1, Player player2, Board boardP1, Board boardP2)
         {
-            player1.place(board);
-            player2.place(board);
+            player1.place(boardP1);
+            player2.place(boardP2);
 
             bool finished = false;
             Player curr_player = player1;
             Player opponent = player2;
+            Board curr_board = boardP1;
+            Board board_opponent = boardP2;
 
             while (!finished)
             {
-                curr_player.shoot(opponent);
+                curr_player.shoot(opponent, boardOpponent);
                 if (opponent.boatList.Length == 0) { finished = true; }
                 else
                 {
                     Player tmpPlayer = curr_player;
                     curr_player = opponent;
                     opponent = tmpPlayer;
+                    
                 }
             }
             return curr_player;

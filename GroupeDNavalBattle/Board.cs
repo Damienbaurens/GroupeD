@@ -9,7 +9,7 @@ namespace GroupeDNavalBattle
     public class Board
     {
         public List<SeaElement> SeaElementList = new List<SeaElement> { };
-        int player;
+        public int player;
 
         public Board(int player)
         {
@@ -23,5 +23,14 @@ namespace GroupeDNavalBattle
             }
             this.player = player;
         }
+        public  List<SeaElement> getSeaElementList()
+        {
+            return SeaElementList;
+        }
+        public  int getPlayer()
+        {
+            return player;
+        }
+
     }
 }

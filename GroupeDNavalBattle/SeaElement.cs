@@ -15,7 +15,7 @@ namespace GroupeDNavalBattle
         public int posX { get; }
         public int posY { get;}
         public int player { get; }
-        Boolean known { get; set; }
+        public Boolean known { get; set; }
 
         Boolean _clickable;
         public Boolean clickable 

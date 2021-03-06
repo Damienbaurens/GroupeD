@@ -10,5 +10,19 @@ namespace GroupeDNavalBattle
     {
         public int size;
         public SeaElement [] position;
+        public int Life()
+        {
+            int touch = 0;
+            for (int element=0; element<position.Length; element++)
+            {
+                
+                if (position[element].state == State.Touched)
+                {
+                    touch += 1;
+                }
+                
+            }
+            return size - touch;
+        }
     }
 }
