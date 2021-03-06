@@ -82,9 +82,87 @@ namespace GroupeDNavalBattle
                 for (int element = 0; element < currentBoat.size; element++)
                 {
                     SeaElement target = ButtonBuffer.getPressedSeaElement();
-                    while (target == null)
+                    Boolean validTarget = false;
+                    while (!validTarget)
                     {
                         target = ButtonBuffer.getPressedSeaElement();
+                        if(target != null)
+                        {
+                            // on compte le nombre de cases valides à droite
+                            Boolean isValid=true;
+                            int validRight=0;
+                            int checkX=target.posX+1;
+                            while( checkX <10 && isValid)
+                            {
+                                if(listInterdit[checkX,target.posY-1]==1)
+                                {
+                                    isValid=false;
+                                }
+                                else
+                                {
+                                    checkX++;
+                                    validRight++;
+                                }
+                            }
+
+                            // on compte le nombre de cases valides à gauche
+                            isValid=true;
+                            int validLeft=0;
+                            checkX=target.posX-1;
+                            while( checkX >=0 && isValid)
+                            {
+                                if(listInterdit[checkX,target.posY-1]==1)
+                                {
+                                    isValid=false;
+                                }
+                                else
+                                {
+                                    checkX--;
+                                    validLeft++;
+                                }
+                            }
+
+                            // on compte le nombre de cases valides en haut
+                            isValid=true;
+                            int validUp=0;
+                            int checkY=target.posY+1;
+                            while( checkY <10 && isValid)
+                            {
+                                if(listInterdit[target.posX-1,checkY]==1)
+                                {
+                                    isValid=false;
+                                }
+                                else
+                                {
+                                    checkY++;
+                                    validUp++;
+                                }
+                            }
+
+                            // on compte le nombre de cases valides en bas
+                            isValid=true;
+                            int validDown=0;
+                            checkY=target.posY-1;
+                            while( checkY>=0 && isValid)
+                            {
+                                if(listInterdit[target.posX-1,checkY]==1)
+                                {
+                                    isValid=false;
+                                }
+                                else
+                                {
+                                    checkY--;
+                                    validDown++;
+                                }
+                            }
+
+                            // s'il y a assez de place pour placer le bateau, on valide la case cliquée
+                            if((validDown+validUp+1)<=currentBoat.size || (validLeft+validRight+1)<=currentBoat.size)
+                            {
+                                validTarget=true;
+                            }
+
+                        }
                     }
                     ButtonBuffer.setPressedSeaElement(null);
                     currentBoat.position[element] = target;
@@ -100,7 +178,7 @@ namespace GroupeDNavalBattle
                                     board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable= false;
                                     //rendre tous les élements de non proche en proche non clicable
                                     board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).state = State.Boat;
-                                    listInterdit[target.posX, target.posY] = 1;
+                                    listInterdit[target.posX-1, target.posY-1] = 1;
                                     //rendre la case inclicable liste
                                 }
 
@@ -133,17 +211,17 @@ namespace GroupeDNavalBattle
                                     board.SeaElementList.ElementAt((x0) * 10 + (y0 + 1)).clickable = false;
                                 }
                             }
-                            // après avoir verifier que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
+                            // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
                             if (y > 0)
                             {
-                                if(listInterdit[target.posX, target.posY-1] != 1)
+                                if(listInterdit[x, y-1] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x) * 10 + (y - 1)).clickable = true;
                                 }
                             }
                             if (y < 9)
                             {
-                                if (listInterdit[target.posX, target.posY + 1] != 1)
+                                if (listInterdit[x, y + 1] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x) * 10 + (y + 1)).clickable = true;
                                 }
@@ -164,17 +242,17 @@ namespace GroupeDNavalBattle
                                     board.SeaElementList.ElementAt((x0+1) * 10 + (y0)).clickable = false;
                                 }
                             }
-                            // après avoir verifier que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
+                            // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
                             if (x > 0)
                             {
-                                if (listInterdit[target.posX-1, target.posY] != 1)
+                                if (listInterdit[x-1, y] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x-1) * 10 + (y)).clickable = true;
                                 }
                             }
                             if (x < 9)
                             {
-                                if (listInterdit[target.posX+1, target.posY] != 1)
+                                if (listInterdit[x+1, y] != 1)
                                 {
                                     board.SeaElementList.ElementAt((x+1) * 10 + (y)).clickable = true;
                                 }
@@ -187,7 +265,7 @@ namespace GroupeDNavalBattle
                         board.SeaElementList.ElementAt((x) * 10 + (y)).state = State.Boat;
                     }
                 }
-                //ajout des cases de bord des bateaux dans la liste d'élément interdit
+                //ajout des cases de bord des bateaux dans la liste d'éléments interdits
                 for (int element=0; element< currentBoat.size; element++)
                 {
                     int x = currentBoat.position[element].posX - 1;
