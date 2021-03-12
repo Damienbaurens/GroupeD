@@ -33,13 +33,16 @@ namespace GroupeDNavalBattle
 
             while (!finished)
             {
-                curr_player.shoot(opponent, boardOpponent);
+                curr_player.shoot(opponent, board_opponent);
                 if (opponent.boatList.Length == 0) { finished = true; }
                 else
                 {
                     Player tmpPlayer = curr_player;
                     curr_player = opponent;
                     opponent = tmpPlayer;
+                    Board tmpBoard = curr_board;
+                    curr_board = board_opponent;
+                    board_opponent = tmpBoard;
                     
                 }
             }
