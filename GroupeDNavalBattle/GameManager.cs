@@ -43,6 +43,7 @@ namespace GroupeDNavalBattle
                     Board tmpBoard = curr_board;
                     curr_board = board_opponent;
                     board_opponent = tmpBoard;
+                    
                 }
             }
             return curr_player;
