@@ -18,6 +18,10 @@ namespace GroupeDNavalBattle
             }
 
             SeaElement shootable = ButtonBuffer.getPressedSeaElement();
+            while (shootable != null)
+            {
+                shootable = ButtonBuffer.getPressedSeaElement();
+            }
 
             if (opponent.id == 2 && shootable.known == false)
             {
@@ -30,40 +34,41 @@ namespace GroupeDNavalBattle
                 }
                 if (shootable.state == State.Boat)
                 {
-                    int nboat = 0;
-                    while (nboat < opponent.boatList.Length)
+                    for (int nboat = 0; nboat < opponent.boatList.Length; nboat++)
                     {
-                        Boat currentBoat = opponent.boatList[nboat];
-                        for (int element = 0; element < currentBoat.size; element++)
                         {
-                            if ((shootable.posX == currentBoat.position[element].posX - 1) && (shootable.posY == currentBoat.position[element].posY - 1))
+                            Boat currentBoat = opponent.boatList[nboat];
+                            for (int element = 0; element < currentBoat.size; element++)
                             {
-                                int pv = currentBoat.Life();
-                                if (pv > 1)
+                                if ((shootable.posX == currentBoat.position[element].posX - 1) && (shootable.posY == currentBoat.position[element].posY - 1))
                                 {
-                                    shootable.state = State.Touched;
-                                    shootable.clickable = false;
-                                }
-                                else
-                                {
-                                    for (int element2 =0; element2< currentBoat.size; element2++)
+                                    int pv = currentBoat.Life();
+                                    if (pv > 1)
                                     {
-                                        currentBoat.position[element2].state = State.Sunk;
+                                        shootable.state = State.Touched;
+                                        shootable.clickable = false;
                                     }
-                                    shootable.state = State.Sunk;
-                                    shootable.clickable = false;
+                                    else
+                                    {
+                                        for (int element2 = 0; element2 < currentBoat.size; element2++)
+                                        {
+                                            currentBoat.position[element2].state = State.Sunk;
+                                        }
+                                        shootable.state = State.Sunk;
+                                        shootable.clickable = false;
+                                    }
+
                                 }
-
                             }
+                            opponent.boatList[nboat] = currentBoat;
                         }
-                        nboat += 1;
+
+
                     }
-
-
                 }
-                //SeaElement.setState();
             }
         }
+
         public override void place(Board board)
         {
             int nboat = 0;
@@ -293,8 +298,8 @@ namespace GroupeDNavalBattle
                         }
                     }
                 }
-                    
-
+                this.boatList[nboat] = currentBoat;
+                nboat++;
             }
         }
     }

@@ -10,7 +10,47 @@ namespace GroupeDNavalBattle
     {
         public override void shoot(Player opponent, Board boardOpponent)
         {
-            throw new NotImplementedException();
+            List<int> targetable = new List<int> { };
+            for (int index = 0; index < boardOpponent.SeaElementList.Count; index++)
+            {
+                if (boardOpponent.SeaElementList[index].state != State.Plouf && boardOpponent.SeaElementList[index].state != State.Touched && boardOpponent.SeaElementList[index].state != State.Sunk)
+                {
+                    targetable.Add(index);
+                }
+            }
+            Random random = new Random();
+            int targetIndex = targetable[random.Next(targetable.Count)];
+            SeaElement target = boardOpponent.SeaElementList[targetIndex];
+            if (target.state == State.Boat)
+            {
+                for (int nboat=0; nboat < opponent.boatList.Length; nboat++)
+                {
+                    Boat currentBoat = opponent.boatList[nboat];
+                    for (int element = 0; element < currentBoat.size; element++)
+                    {
+                        if ((target.posX == currentBoat.position[element].posX - 1) && (target.posY == currentBoat.position[element].posY - 1))
+                        {
+                            int pv = currentBoat.Life();
+                            if (pv > 1)
+                            {
+                                target.state = State.Touched;
+                                target.clickable = false;
+                            }
+                            else
+                            {
+                                for (int element2 = 0; element2 < currentBoat.size; element2++)
+                                {
+                                    currentBoat.position[element2].state = State.Sunk;
+                                }
+                                target.state = State.Sunk;
+                                target.clickable = false;
+                            }
+
+                        }
+                    }
+                }
+                boardOpponent.SeaElementList[targetIndex] = target;
+            }
         }
 
         public override void place(Board board)
@@ -21,49 +61,103 @@ namespace GroupeDNavalBattle
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    listInterdit[i, j] = 0;
+                    listInterdit[i, j] = 0; // au début tout est clickable
                 }
             }
+
             while (nboat < this.boatList.Length)
             {
                 Boat currentBoat = this.boatList[nboat];
-                Boolean Horizontal = true;
                 SeaElement target;
-                int[][] utilisable;
-                for (int element = 0; element < currentBoat.size; element++)
+                Boolean acceptable = false;
+                while (!acceptable)
                 {
-                    Boolean acceptable = false;
-                    if (element == 0)
+                    acceptable = true;
+                    Random random = new Random();
+                    int direction = random.Next(3); // 0 pour gauche, 1 pour haut, 2 pour droite, 3 pour bas
+                    int aleaX = currentBoat.size + random.Next(10 - 2 * currentBoat.size) + 1;
+                    int aleaY = currentBoat.size + random.Next(10 - 2 * currentBoat.size) + 1;
+                    if (direction == 0)
                     {
-                        while (acceptable == false)
+                        for (int element = 0; element < currentBoat.size; element++)
                         {
-                            Random random = new Random();
-                            int aleaX = random.Next(10) + 1;
-                            int aleaY = random.Next(10) + 1;
-                            if (listInterdit[aleaY - 1, aleaX - 1] == 0)
+                            target = board.SeaElementList[10 * (aleaX - 1 - element) + (aleaY - 1)];
+                            if (listInterdit[target.posX, target.posY] == 1)
                             {
-                                acceptable = true;
-                                target = board.getSeaElementList()[10 * (aleaX - 1) + (aleaY - 1)];
-                                if (aleaX > 1)
-                                {
-                                    if (aleaY > 1)
-                                    {
-                                        //utilisable;
-                                    }
-                                }
+                                acceptable = false;
+                                break;
+                            }
+                            else 
+                            {
+                                currentBoat.position[element] = target;
                             }
                         }
                     }
-                    else
-                    {
 
+                    else if (direction == 1)
+                    {
+                        for (int element = 0; element < currentBoat.size; element++)
+                        {
+                            target = board.SeaElementList[10 * (aleaX - 1) + (aleaY - 1 + element)];
+                            if (listInterdit[target.posX, target.posY] == 1)
+                            {
+                                acceptable = false;
+                                break;
+                            }
+                            else
+                            {
+                                currentBoat.position[element] = target;
+                            }
+                        }
                     }
 
+                    else if (direction == 2)
+                    {
+                        for (int element = 0; element < currentBoat.size; element++)
+                        {
+                            target = board.SeaElementList[10 * (aleaX - 1 + element) + (aleaY - 1)];
+                            if (listInterdit[target.posX, target.posY] == 1)
+                            {
+                                acceptable = false;
+                                break;
+                            }
+                            else
+                            {
+                                currentBoat.position[element] = target;
+                            }
+                        }
+                    }
 
+                    else if (direction == 3)
+                    {
+                        for (int element = 0; element < currentBoat.size; element++)
+                        {
+                            target = board.SeaElementList[10 * (aleaX - 1 ) + (aleaY - 1 - element)];
+                            if (listInterdit[target.posX, target.posY] == 1)
+                            {
+                                acceptable = false;
+                                break;
+                            }
+                            else
+                            {
+                                currentBoat.position[element] = target;
+                            }
+                        }
+                    }
+
+                    if (acceptable)
+                    {
+                        this.boatList[nboat] = currentBoat;
+                        for (int element = 0; element < currentBoat.size; element++)
+                        {
+                            board.SeaElementList[10 * (currentBoat.position[element].posX - 1 - element) + (currentBoat.position[element].posY - 1)] = currentBoat.position[element];
+                            listInterdit[currentBoat.position[element].posX, currentBoat.position[element].posY] = 1;
+                        }
+                    }
                 }
+                nboat++;
                 throw new NotImplementedException();
             }
         }
     }
 }
-
