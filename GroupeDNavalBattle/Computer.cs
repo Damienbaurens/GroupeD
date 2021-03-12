@@ -156,7 +156,6 @@ namespace GroupeDNavalBattle
                     }
                 }
                 nboat++;
-                throw new NotImplementedException();
             }
         }
     }
