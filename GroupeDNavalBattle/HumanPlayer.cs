@@ -8,6 +8,11 @@ namespace GroupeDNavalBattle
 {
     internal class HumanPlayer : Player
     {
+        public HumanPlayer(int id, Boat[] boatList) 
+        {
+            this.id = id;
+            this.boatList = boatList;
+        }
         public override void shoot(Player opponent, Board boardOpponent)
         {
             List<SeaElement> elementPlayer = boardOpponent.SeaElementList;

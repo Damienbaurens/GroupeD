@@ -10,6 +10,11 @@ namespace GroupeDNavalBattle
     {
         public int size;
         public SeaElement [] position;
+        public Boat(int size)
+        {
+            this.size = size;
+            this.position = null;
+        }
         public int Life()
         {
             int touch = 0;

@@ -8,6 +8,11 @@ namespace GroupeDNavalBattle
 {
     class Computer : Player
     {
+        public Computer(int id, Boat[] boatList)
+        {
+            this.id = id;
+            this.boatList = boatList;
+        }
         public override void shoot(Player opponent, Board boardOpponent)
         {
             List<int> targetable = new List<int> { };
