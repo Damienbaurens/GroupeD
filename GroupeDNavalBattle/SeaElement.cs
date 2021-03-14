@@ -114,6 +114,10 @@ namespace GroupeDNavalBattle
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ButtonBuffer.setPressedSeaElement(this);
+            if (GameManager.getGameState() != "processing")
+            {
+                GameManager.OnClick(this);
+            }
         }
         
     }

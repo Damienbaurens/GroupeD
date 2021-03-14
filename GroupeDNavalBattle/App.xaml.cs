@@ -67,12 +67,32 @@ namespace GroupeDNavalBattle
                     // Quand la pile de navigation n'est pas restaurée, accédez à la première page,
                     // puis configurez la nouvelle page en transmettant les informations requises en tant que
                     // paramètre
-                    Board p1Board = new Board(1);
-                    Board p2Board = new Board(2);
-                    Board[] args = new Board[2];
-                    args[0] = p1Board;
-                    args[1] = p2Board;
-                    rootFrame.Navigate(typeof(MainPage), args);
+                    GameManager.setBoardJ1(new Board(1));
+                    GameManager.setBoardJ2(new Board(2));
+
+                    Boat[] p1Boats = new Boat[6];
+                    p1Boats[0] = new Boat(2);
+                    p1Boats[1] = new Boat(3);
+                    p1Boats[2] = new Boat(3);
+                    p1Boats[3] = new Boat(4);
+                    p1Boats[4] = new Boat(4);
+                    p1Boats[5] = new Boat(5);
+                    GameManager.setnBoatsToPlace(p1Boats.Length);
+
+                    Boat[] p2Boats = new Boat[6];
+                    p2Boats[0] = new Boat(2);
+                    p2Boats[1] = new Boat(3);
+                    p2Boats[2] = new Boat(3);
+                    p2Boats[3] = new Boat(4);
+                    p2Boats[4] = new Boat(4);
+                    p2Boats[5] = new Boat(5);
+
+                    HumanPlayer p1 = new HumanPlayer(1, p1Boats);
+                    GameManager.setJ1(p1);
+                    Computer p2 = new Computer(2, p2Boats);
+                    GameManager.setJ2(p2);
+                    GameManager.setGameState("place");
+                    rootFrame.Navigate(typeof(MainPage));
                 }
                 // Vérifiez que la fenêtre actuelle est active
                 Window.Current.Activate();
