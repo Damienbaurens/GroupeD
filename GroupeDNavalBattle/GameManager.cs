@@ -9,13 +9,11 @@ namespace GroupeDNavalBattle
     class GameManager
     {
         // Attributs
-        private Boat[] InGameBoats;
         private float timer { get; set; }
 
         // Constructeur
-        public GameManager(Boat[] InGameBoats, int timer)
+        public GameManager(int timer)
         {
-            this.InGameBoats = InGameBoats;
             this.timer = timer;
         }
 

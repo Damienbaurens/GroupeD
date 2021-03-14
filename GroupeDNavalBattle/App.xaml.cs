@@ -67,7 +67,12 @@ namespace GroupeDNavalBattle
                     // Quand la pile de navigation n'est pas restaurée, accédez à la première page,
                     // puis configurez la nouvelle page en transmettant les informations requises en tant que
                     // paramètre
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    Board p1Board = new Board(1);
+                    Board p2Board = new Board(2);
+                    Board[] args = new Board[2];
+                    args[0] = p1Board;
+                    args[1] = p2Board;
+                    rootFrame.Navigate(typeof(MainPage), args);
                 }
                 // Vérifiez que la fenêtre actuelle est active
                 Window.Current.Activate();
