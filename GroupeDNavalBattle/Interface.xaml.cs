@@ -27,6 +27,8 @@ namespace GroupeDNavalBattle
             this.InitializeComponent();
             Board p1Board = new Board(1);
             Board p2Board = new Board(2);
+            GameManager.setBoardJ1(p1Board);
+            GameManager.setBoardJ2(p2Board);
             foreach (SeaElement seaelement in p1Board.SeaElementList)
             {
                 NavalBattleD.Children.Add(seaelement.button);

@@ -15,6 +15,7 @@ namespace GroupeDNavalBattle
         private static Board boardJ1;
         private static Board boardJ2;
         private static int nBoatsToPlace;
+        private static int element;
         public static String getGameState()
         {
             return gameState;
@@ -63,6 +64,14 @@ namespace GroupeDNavalBattle
         {
             nBoatsToPlace = value;
         }
+        public static int getElement()
+        {
+            return element;
+        }
+        public static void setElement(int value)
+        {
+            element = value;
+        }
         public static Boolean checkFinshed()
         {
             for (int i = 0; i < J1.boatList.Length; i++)
@@ -78,15 +87,20 @@ namespace GroupeDNavalBattle
         {
             if (gameState == "place")
             {
-                gameState = "processing";
-                J1.place(boardJ1);
-                J2.place(boardJ2);
-                nBoatsToPlace--;
+                if (J1.place(boardJ1) != null)
+                { 
+                    element++;
+                    if (element == J1.boatList.Length)
+                    {
+                        nBoatsToPlace--;
+                        element = 0;
+                    }
+                }
+                //J2.place(boardJ2);
                 if(nBoatsToPlace == 0) gameState = "shoot";
             }
             else if (gameState == "shoot")
             {
-                gameState = "processing";
                 J1.shoot(J2, boardJ2);
                 if (checkFinshed())
                 { 
@@ -99,7 +113,6 @@ namespace GroupeDNavalBattle
                     gameState = "finished";
                     winner = J2;
                 }
-                if (gameState == "processing") gameState = "shoot";
             }
         }
     }

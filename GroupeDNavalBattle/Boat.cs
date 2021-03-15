@@ -13,7 +13,7 @@ namespace GroupeDNavalBattle
         public Boat(int size)
         {
             this.size = size;
-            this.position = null;
+            this.position = new SeaElement[size];
         }
         public int Life()
         {

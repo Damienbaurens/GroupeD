@@ -67,8 +67,6 @@ namespace GroupeDNavalBattle
                     // Quand la pile de navigation n'est pas restaurée, accédez à la première page,
                     // puis configurez la nouvelle page en transmettant les informations requises en tant que
                     // paramètre
-                    GameManager.setBoardJ1(new Board(1));
-                    GameManager.setBoardJ2(new Board(2));
 
                     Boat[] p1Boats = new Boat[6];
                     p1Boats[0] = new Boat(2);
@@ -78,6 +76,7 @@ namespace GroupeDNavalBattle
                     p1Boats[4] = new Boat(4);
                     p1Boats[5] = new Boat(5);
                     GameManager.setnBoatsToPlace(p1Boats.Length);
+                    GameManager.setElement(0);
 
                     Boat[] p2Boats = new Boat[6];
                     p2Boats[0] = new Boat(2);

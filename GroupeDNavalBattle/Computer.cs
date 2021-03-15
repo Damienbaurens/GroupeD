@@ -58,8 +58,9 @@ namespace GroupeDNavalBattle
             }
         }
 
-        public override void place(Board board)
+        public override Board place(Board board)
         {
+            return null;
             int nboat = 0;
             int[,] listInterdit = new int[10, 10];// liste d'élément inclickable strictement
             for (int i = 0; i < 10; i++)
