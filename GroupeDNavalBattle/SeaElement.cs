@@ -71,27 +71,29 @@ namespace GroupeDNavalBattle
             set
             {
                 this._state = value;
-                switch (_state)
+                if(this.known == true)
                 {
-                    case State.Water:
-                        this.button.Background = BrushSet.waterBrush;
-                        break;
-                    case State.Boat:
-                        this.button.Background = BrushSet.boatBrush;
-                        break;
-                    case State.Touched:
-                        this.button.Background = BrushSet.touchedBrush;
-                        break;
-                    case State.Sunk:
-                        this.button.Background = BrushSet.sunkBrush;
-                        break;
-                    case State.Plouf:
-                        this.button.Background = BrushSet.ploufBrush;
-                        break;
-                    case State.Unknown:
-                        this.button.Background = BrushSet.waterBrush;
-                        break;
+                    switch (_state)
+                    {
+                        case State.Water:
+                            this.button.Background = BrushSet.waterBrush;
+                            break;
+                        case State.Boat:
+                            this.button.Background = BrushSet.boatBrush;
+                            break;
+                        case State.Touched:
+                            this.button.Background = BrushSet.touchedBrush;
+                            break;
+                        case State.Sunk:
+                            this.button.Background = BrushSet.sunkBrush;
+                            break;
+                        case State.Plouf:
+                            this.button.Background = BrushSet.ploufBrush;
+                            break;
+
+                    }
                 }
+                
             }
         }
 
@@ -99,13 +101,26 @@ namespace GroupeDNavalBattle
         //Constructeur
         public SeaElement(int posX, int posY, int player, Boolean known)
         {
+            
             this.posX = posX; //position en abscisse (valeurs de 1 à 10, le placement du bouton se fera en multipliant)
             this.posY = posY; //position en ordonnée
+            
             this.player = player; //numéro du joueur
+            this.button = new Button();
             this.known = known;
+            
+            if (this.known == false)
+            {
+                
+                this.button.Background = BrushSet.waterBrush;
+            }
+            else
+            {
+                this.state = this.state;
+            }
+
             this.name = "P" + player.ToString() + posX.ToString() + posY.ToString();
 
-            this.button = new Button();
             this.button.Name = this.name + "Button";
             this.button.Content = ""; //bouton vide
 
