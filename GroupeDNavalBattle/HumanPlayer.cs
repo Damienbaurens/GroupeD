@@ -13,29 +13,21 @@ namespace GroupeDNavalBattle
             this.id = id;
             this.boatList = boatList;
         }
-        public override void shoot(Player opponent, Board boardOpponent)
+        public override Board shoot(Player opponent, Board boardOpponent)
         {
             List<SeaElement> elementPlayer = boardOpponent.SeaElementList;
-            for (int index = 0; index < elementPlayer.Count; index++)
-            {
-                SeaElement test = elementPlayer[index];
-                test.clickable = false;
-            }
 
             SeaElement shootable = ButtonBuffer.getPressedSeaElement();
-            while (shootable != null)
-            {
-                shootable = ButtonBuffer.getPressedSeaElement();
-            }
+            if (shootable == null) return null;
+            if (shootable.button.Name[1] != '2') return null;
 
-            if (opponent.id == 2 && shootable.known == false)
+            if (opponent.id == 2)
             {
                 ButtonBuffer.setPressedSeaElement(null);
                 shootable.known = true;
                 if (shootable.state == State.Water)
                 {
                     shootable.state = State.Plouf;
-                    shootable.clickable = false;
                 }
                 if (shootable.state == State.Boat)
                 {
@@ -45,13 +37,12 @@ namespace GroupeDNavalBattle
                             Boat currentBoat = opponent.boatList[nboat];
                             for (int element = 0; element < currentBoat.size; element++)
                             {
-                                if ((shootable.posX == currentBoat.position[element].posX - 1) && (shootable.posY == currentBoat.position[element].posY - 1))
+                                if ((shootable.posX == currentBoat.position[element].posX) && (shootable.posY == currentBoat.position[element].posY))
                                 {
                                     int pv = currentBoat.Life();
                                     if (pv > 1)
                                     {
                                         shootable.state = State.Touched;
-                                        shootable.clickable = false;
                                     }
                                     else
                                     {
@@ -60,26 +51,38 @@ namespace GroupeDNavalBattle
                                             currentBoat.position[element2].state = State.Sunk;
                                         }
                                         shootable.state = State.Sunk;
-                                        shootable.clickable = false;
                                     }
 
                                 }
                             }
                             opponent.boatList[nboat] = currentBoat;
                         }
-
-
                     }
                 }
             }
+            return boardOpponent;
         }
 
         public override Board place(Board board)
         {
             int nboat = GameManager.getnBoatsToPlace()-1;
             int element = GameManager.getElement();
+
+            Boat currentBoat = this.boatList[nboat];
+            SeaElement target = ButtonBuffer.getPressedSeaElement();
+            if (target == null) return null;
+            if (target.button.Name[1] != '1') return null;
+            if (target.state != State.Water) return null;
+
             int[,] listInterdit= new int[10,10];// liste d'élément inclickable strictement
-            for(int ligne=0; ligne<10; ligne++)
+            for (int ligne = 0; ligne < 10; ligne++)
+            {
+                for (int colonne = 0; colonne < 10; colonne++)
+                {
+                    listInterdit[ligne, colonne] = 0;
+                }
+            }
+            for (int ligne=0; ligne<10; ligne++)
             {
                 for(int colonne=0; colonne<10; colonne++)
                 {
@@ -91,51 +94,28 @@ namespace GroupeDNavalBattle
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                if ((0 < ligne + i) && (9 > ligne + i) && (0 < colonne + j) && (9 > colonne + j))
+                                if ((0 < ligne + i) && (11 > ligne + i) && (0 < colonne + j) && (11 > colonne + j))
                                 {
-                                    listInterdit[ligne - 1 + i, colonne - 1 + j] = 1;
+                                    listInterdit[ligne+ i-1, colonne + j-1] = 1;
                                 }
-
                             }
                         }
                     }
-                    else
-                    {
-                        listInterdit[ligne, colonne] = 0;
-                    }
                 }
             }
-            Boat currentBoat = this.boatList[nboat];
-            SeaElement target = ButtonBuffer.getPressedSeaElement();
-            if (target == null) return null;
-
-
 
             int x = target.posX - 1;
             int y = target.posY - 1;
 
-            for (int k = 0; k < element; k++)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if ((0 < currentBoat.position[k].posY + i) && (9 > currentBoat.position[k].posY + i) && (0 < currentBoat.position[k].posX + j) && (9 > currentBoat.position[k].posX + j))
-                        {
-                            listInterdit[currentBoat.position[k].posY - 1 + i, currentBoat.position[k].posX - 1 + j] = 0;
-                        }
-
-                    }
-                }
-            }
+            if (listInterdit[x, y] == 1) return null;
 
             // on compte le nombre de cases valides à droite
             Boolean isValid=true;
             int validRight=0;
-            int checkX=target.posX;
+            int checkX=x+1;
             while( checkX <10 && isValid)
             {
-                if(listInterdit[checkX,target.posY-1]==1)
+                if(listInterdit[checkX,y]==1)
                 {
                     isValid=false;
                 }
@@ -149,10 +129,10 @@ namespace GroupeDNavalBattle
             // on compte le nombre de cases valides à gauche
             isValid=true;
             int validLeft=0;
-            checkX=target.posX-2;
+            checkX=x-1;
             while( checkX >=0 && isValid)
             {
-                if(listInterdit[checkX,target.posY-1]==1)
+                if(listInterdit[checkX,y]==1)
                 {
                     isValid=false;
                 }
@@ -166,10 +146,10 @@ namespace GroupeDNavalBattle
             // on compte le nombre de cases valides en haut
             isValid=true;
             int validUp=0;
-            int checkY=target.posY-2;
+            int checkY=y-1;
             while( checkY >=0 && isValid)
             {
-                if(listInterdit[target.posX-1,checkY]==1)
+                if(listInterdit[x,checkY]==1)
                 {
                     isValid=false;
                 }
@@ -183,10 +163,10 @@ namespace GroupeDNavalBattle
             // on compte le nombre de cases valides en bas
             isValid=true;
             int validDown=0;
-            checkY=target.posY;
+            checkY=y+1;
             while( checkY<10 && isValid)
             {
-                if(listInterdit[target.posX-1,checkY]==1)
+                if(listInterdit[x,checkY]==1)
                 {
                     isValid=false;
                 }
@@ -197,46 +177,53 @@ namespace GroupeDNavalBattle
                 }
             }
 
+            Boolean validHorizontal = (validLeft + validRight + 1) >= currentBoat.size;
+            Boolean validVertical = (validUp + validDown + 1) >= currentBoat.size;
+
             // s'il y a assez de place pour placer le bateau, on valide la case cliquée
-            if((validDown+validUp+1)<currentBoat.size && (validLeft+validRight+1)<currentBoat.size)
+            if (!validHorizontal && !validVertical)
             {
                 return null;
             }
             ButtonBuffer.setPressedSeaElement(null);
             currentBoat.position[element] = target;
-            board.SeaElementList.ElementAt(x * 10 + y).state = State.Boat;
+            board.SeaElementList.ElementAt(x * 10 + y).state = State.Sunk;
 
             if (element == 0)
             {
                 //rendre la case inclicable liste
-                for (int ligne = 1; ligne < 11; ligne++)
+                for (int ligne = 0; ligne < 10; ligne++)
                 {
-                    for (int colonne = 1; colonne < 11; colonne++)
+                    for (int colonne = 0; colonne < 10; colonne++)
                     {
                         //rendre tous les élements de non proche en proche non clicable
-                        if (ligne == target.posY + 1 && colonne == target.posX)
+                        if (listInterdit[colonne,ligne]==1)
                         {
-                            board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable = true;
+                            board.SeaElementList.ElementAt(colonne * 10 + ligne).clickable = false;
                         }
-                        else if (ligne == target.posY - 1 && colonne == target.posX)
+                        else if (ligne == y + 1 && colonne == x && validVertical)
                         {
-                            board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable = true;
+                            board.SeaElementList.ElementAt(colonne*10 + ligne).clickable = true;
                         }
-                        else if (ligne == target.posY && colonne == target.posX + 1)
+                        else if (ligne == y - 1 && colonne == x && validVertical)
                         {
-                            board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable = true;
+                            board.SeaElementList.ElementAt(colonne*10 + ligne).clickable = true;
                         }
-                        else if (ligne == target.posY && colonne == target.posX - 1)
+                        else if (ligne == y && colonne == x + 1 && validHorizontal)
                         {
-                            board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable = true;
+                            board.SeaElementList.ElementAt(colonne* 10 +ligne).clickable = true;
                         }
-                        else if (ligne == y + 1 && colonne == x + 1)
+                        else if (ligne == y && colonne == x - 1 && validHorizontal)
                         {
-                            board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable = true;
+                            board.SeaElementList.ElementAt(colonne* 10 +ligne).clickable = true;
+                        }
+                        else if (ligne == y && colonne == x)
+                        {
+                            board.SeaElementList.ElementAt(colonne * 10 + ligne).clickable = true;
                         }
                         else
                         {
-                            board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable = false;
+                            board.SeaElementList.ElementAt(colonne * 10 + ligne).clickable = false;
                         }
                     }
                 }
@@ -276,14 +263,14 @@ namespace GroupeDNavalBattle
                         }
                     }
                     // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
-                    if (y > 0)
+                    if (x > 0)
                     {
                         if (listInterdit[x-1, y] != 1)
                         {
                             board.SeaElementList.ElementAt((x-1) * 10 + y).clickable = true;
                         }
                     }
-                    if (y < 9)
+                    if (x < 9)
                     {
                         if (listInterdit[x+1, y] != 1)
                         {
@@ -307,14 +294,14 @@ namespace GroupeDNavalBattle
                         }
                     }
                     // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
-                    if (x > 0)
+                    if (y > 0)
                     {
                         if (listInterdit[x, y-1] != 1)
                         {
                             board.SeaElementList.ElementAt(x * 10 + (y-1)).clickable = true;
                         }
                     }
-                    if (x < 9)
+                    if (y < 9)
                     {
                         if (listInterdit[x , y+1] != 1)
                         {
@@ -323,7 +310,6 @@ namespace GroupeDNavalBattle
                     }
 
                 }
-                board.SeaElementList.ElementAt(x * 10 + y).state = State.Boat;
             }
             this.boatList[nboat] = currentBoat;
             return board;

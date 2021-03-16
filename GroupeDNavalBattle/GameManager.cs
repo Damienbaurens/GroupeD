@@ -76,7 +76,7 @@ namespace GroupeDNavalBattle
         {
             for (int i = 0; i < J1.boatList.Length; i++)
             {
-                if (J1.boatList[i].Life() > 0 || J2.boatList[i].Life() > 0)
+                if (J1.boatList[i].Life() > 0 && J2.boatList[i].Life() > 0)
                 {
                     return false;
                 }
@@ -90,24 +90,28 @@ namespace GroupeDNavalBattle
                 if (J1.place(boardJ1) != null)
                 { 
                     element++;
-                    if (element == J1.boatList.Length)
+                    if (element == J1.boatList[nBoatsToPlace-1].size)
                     {
-                        nBoatsToPlace--;
                         element = 0;
+                        for (int e = 0; e < J1.boatList[nBoatsToPlace - 1].size; e++)
+                        {
+                            J1.boatList[nBoatsToPlace - 1].position[e].state = State.Boat;
+                        }
+                        while (J2.place(boardJ2) == null) { }
+                        nBoatsToPlace--;
                     }
                 }
-                //J2.place(boardJ2);
                 if(nBoatsToPlace == 0) gameState = "shoot";
             }
             else if (gameState == "shoot")
             {
-                J1.shoot(J2, boardJ2);
+                while (J1.shoot(J2, boardJ2)==null) { }
                 if (checkFinshed())
                 { 
                     gameState = "finished";
                     winner = J1;
                 }
-                J2.shoot(J1, boardJ1);
+                while (J2.shoot(J1, boardJ1)==null) { }
                 if (checkFinshed())
                 {
                     gameState = "finished";
