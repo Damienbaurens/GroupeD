@@ -6,47 +6,118 @@ using System.Threading.Tasks;
 
 namespace GroupeDNavalBattle
 {
-    class GameManager
+    static class GameManager
     {
-        // Attributs
-        private Boat[] InGameBoats;
-        private float timer { get; set; }
-
-        // Constructeur
-        public GameManager(Boat[] InGameBoats, int timer)
+        private static String gameState;
+        private static HumanPlayer J1;
+        private static Computer J2;
+        private static Player winner;
+        private static Board boardJ1;
+        private static Board boardJ2;
+        private static int nBoatsToPlace;
+        private static int element;
+        public static String getGameState()
         {
-            this.InGameBoats = InGameBoats;
-            this.timer = timer;
+            return gameState;
         }
-
-        //Méthodes
-        public Player Play(Player player1, Player player2, Board boardP1, Board boardP2)
+        public static void setGameState(String value)
         {
-            player1.place(boardP1);
-            player2.place(boardP2);
-
-            bool finished = false;
-            Player curr_player = player1;
-            Player opponent = player2;
-            Board curr_board = boardP1;
-            Board board_opponent = boardP2;
-
-            while (!finished)
+            gameState = value;
+        }
+        public static HumanPlayer getJ1()
+        {
+            return J1;
+        }
+        public static void setJ1(HumanPlayer value)
+        {
+            J1 = value;
+        }
+        public static Computer getJ2()
+        {
+            return J2;
+        }
+        public static void setJ2(Computer value)
+        {
+            J2 = value;
+        }
+        public static Board getBoardJ1()
+        {
+            return boardJ1;
+        }
+        public static void setBoardJ1(Board value) 
+        {
+            boardJ1 = value;
+        }
+        public static Board getBoardJ2()
+        {
+            return boardJ2;
+        }
+        public static void setBoardJ2(Board value)
+        {
+            boardJ2 = value;
+        }
+        public static int getnBoatsToPlace()
+        {
+            return nBoatsToPlace;
+        }
+        public static void setnBoatsToPlace(int value)
+        {
+            nBoatsToPlace = value;
+        }
+        public static int getElement()
+        {
+            return element;
+        }
+        public static void setElement(int value)
+        {
+            element = value;
+        }
+        public static Boolean checkFinshed()
+        {
+            for (int i = 0; i < J1.boatList.Length; i++)
             {
-                curr_player.shoot(opponent, board_opponent);
-                if (opponent.boatList.Length == 0) { finished = true; }
-                else
+                if (J1.boatList[i].Life() > 0 && J2.boatList[i].Life() > 0)
                 {
-                    Player tmpPlayer = curr_player;
-                    curr_player = opponent;
-                    opponent = tmpPlayer;
-                    Board tmpBoard = curr_board;
-                    curr_board = board_opponent;
-                    board_opponent = tmpBoard;
-                    
+                    return false;
                 }
             }
-            return curr_player;
+            return true;
+        }
+        public static void OnClick(SeaElement clicked)
+        {
+            if (gameState == "place")
+            {
+                if (J1.place(boardJ1) != null)
+                { 
+                    element++;
+                    if (element == J1.boatList[nBoatsToPlace-1].size)
+                    {
+                        element = 0;
+                        for (int e = 0; e < J1.boatList[nBoatsToPlace - 1].size; e++)
+                        {
+                            J1.boatList[nBoatsToPlace - 1].position[e].state = State.Boat;
+                        }
+                        while (J2.place(boardJ2) == null) { }
+                        nBoatsToPlace--;
+                    }
+                }
+                if(nBoatsToPlace == 0) gameState = "shoot";
+            }
+            else if (gameState == "shoot")
+            {
+                while (J1.shoot(J2, boardJ2)==null) { }
+                if (checkFinshed())
+                { 
+                    gameState = "finished";
+                    winner = J1;
+                }
+                while (J2.shoot(J1, boardJ1)==null) { }
+                if (checkFinshed())
+                {
+                    gameState = "finished";
+                    winner = J2;
+                }
+            }
         }
     }
 }
