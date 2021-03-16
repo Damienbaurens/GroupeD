@@ -15,8 +15,25 @@ namespace GroupeDNavalBattle
         public int posX { get; }
         public int posY { get;}
         public int player { get; }
-        public Boolean known { get; set; }
 
+        Boolean _known;
+        public Boolean known
+        {
+            get => _known;
+            set
+            {
+                this._known = value;
+                if(this._known == true)
+                {
+                    this.state = this.state;
+                }
+                else
+                {
+                    this.button.Background = BrushSet.waterBrush;
+                }
+            }
+        } 
+             
         Boolean _clickable;
         public Boolean clickable 
         {
