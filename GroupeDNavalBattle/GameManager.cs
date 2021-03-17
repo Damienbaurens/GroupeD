@@ -74,14 +74,24 @@ namespace GroupeDNavalBattle
         }
         public static Boolean checkFinshed()
         {
+            Boolean p1won = true;
+            Boolean p2won = true;
             for (int i = 0; i < J1.boatList.Length; i++)
             {
-                if (J1.boatList[i].Life() > 0 && J2.boatList[i].Life() > 0)
+                if (J1.boatList[i].Life() > 0)
                 {
-                    return false;
+                    p1won = false;
                 }
             }
-            return true;
+            for (int i = 0; i < J2.boatList.Length; i++)
+            {
+                if (J2.boatList[i].Life() > 0)
+                {
+                    p2won = false;
+                }
+            }
+            if (p1won || p2won) { return true; }
+            return false;
         }
         public static void OnClick(SeaElement clicked)
         {
@@ -105,17 +115,19 @@ namespace GroupeDNavalBattle
             }
             else if (gameState == "shoot")
             {
-                while (J1.shoot(J2, boardJ2)==null) { }
-                if (checkFinshed())
-                { 
-                    gameState = "finished";
-                    winner = J1;
-                }
-                while (J2.shoot(J1, boardJ1)==null) { }
-                if (checkFinshed())
+                if (J1.shoot(J2, boardJ2) != null)
                 {
-                    gameState = "finished";
-                    winner = J2;
+                    if (checkFinshed())
+                    {
+                        gameState = "finished";
+                        winner = J1;
+                    }
+                    while (J2.shoot(J1, boardJ1) == null) { }
+                    if (checkFinshed())
+                    {
+                        gameState = "finished";
+                        winner = J2;
+                    }
                 }
             }
         }
