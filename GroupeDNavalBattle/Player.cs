@@ -8,10 +8,12 @@ namespace GroupeDNavalBattle
 {
     public abstract class Player
     {
-        public int id { get; set; }
-        public Boat[] boatList { get; set; }
-        public abstract Board shoot( Player opponent, Board boardOpponent);
-        public abstract Board place(Board board);
+        //Attributs
+        public int id { get; set; } // identifiant ( 1 pour humain et 2 pour ordinateur )
+        public Boat[] boatList { get; set; } // liste des bateaux du joueur
+        //Méthodes
+        public abstract Board shoot( Player opponent, Board boardOpponent); // méthode permettant de tirer un un bateau ennemi
+        public abstract Board place(Board board); // méthode permettant de placer ses bateaux en mer
        
     }
 }

@@ -8,14 +8,14 @@ namespace GroupeDNavalBattle
 {
     static class GameManager
     {
-        private static String gameState;
-        private static HumanPlayer J1;
-        private static Computer J2;
-        private static Player winner;
-        private static Board boardJ1;
-        private static Board boardJ2;
-        private static int nBoatsToPlace;
-        private static int element;
+        private static String gameState; // l'état de la partie : placement des bateaux (place), tir (shoot) ou terminée (finished)
+        private static HumanPlayer J1; // le joueur 1
+        private static Computer J2; // le joueur 2
+        private static Player winner; // le gagnant
+        private static Board boardJ1; // la grille du joueur 1
+        private static Board boardJ2; // la grille du joueur 1
+        private static int nBoatsToPlace; // le nombre de bateaux restant à placer (pour le début de partie)
+        private static int element; // l'indice de la case du bateau que l'on est en train de placer (pour un bateau de taille 5 il ira de 0 à 4, etc)
         public static String getGameState()
         {
             return gameState;
@@ -74,13 +74,13 @@ namespace GroupeDNavalBattle
         }
         public static Boolean checkFinshed()
         {
-            Boolean p1won = true;
-            Boolean p2won = true;
+            Boolean p1won = true; // vrai si le joueur 1 a gagné
+            Boolean p2won = true; // vrai si le joueur 2 a gagné
             for (int i = 0; i < J1.boatList.Length; i++)
             {
-                if (J1.boatList[i].Life() > 0)
+                if (J1.boatList[i].Life() > 0) // on vérifie s'il reste des bateaux non coulés
                 {
-                    p1won = false;
+                    p1won = false; 
                 }
             }
             for (int i = 0; i < J2.boatList.Length; i++)
@@ -100,7 +100,7 @@ namespace GroupeDNavalBattle
                 if (J1.place(boardJ1) != null)
                 { 
                     element++;
-                    if (element == J1.boatList[nBoatsToPlace-1].size)
+                    if (element == J1.boatList[nBoatsToPlace-1].size) // si on a fini de placer le bateau
                     {
                         element = 0;
                         for (int e = 0; e < J1.boatList[nBoatsToPlace - 1].size; e++)
@@ -111,19 +111,19 @@ namespace GroupeDNavalBattle
                         nBoatsToPlace--;
                     }
                 }
-                if(nBoatsToPlace == 0) gameState = "shoot";
+                if(nBoatsToPlace == 0) gameState = "shoot"; // si on a placé tous les bateaux, que la partie commence !
             }
             else if (gameState == "shoot")
             {
                 if (J1.shoot(J2, boardJ2) != null)
                 {
-                    if (checkFinshed())
+                    if (checkFinshed()) // on regarde si le joueur 1 a fini la partie
                     {
                         gameState = "finished";
                         winner = J1;
                     }
                     while (J2.shoot(J1, boardJ1) == null) { }
-                    if (checkFinshed())
+                    if (checkFinshed()) // on regarde si le joueur 2 a fini la partie
                     {
                         gameState = "finished";
                         winner = J2;

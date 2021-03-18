@@ -8,9 +8,11 @@ namespace GroupeDNavalBattle
 {
     public class Board
     {
-        public List<SeaElement> SeaElementList = new List<SeaElement> { };
-        public int player;
+        // Attributs
+        public List<SeaElement> SeaElementList = new List<SeaElement> { }; // liste des éléments de mer (cases)
+        public int player; // joueur à qui appartient la grille
 
+        // Constructeur
         public Board(int player)
         {
             for (int x = 1; x < 11; x++)
@@ -23,6 +25,7 @@ namespace GroupeDNavalBattle
             }
             this.player = player;
         }
+        // Méthodes
         public  List<SeaElement> getSeaElementList()
         {
             return SeaElementList;

@@ -25,23 +25,23 @@ namespace GroupeDNavalBattle
         public MainPage()
         {
             this.InitializeComponent();
-            Board p1Board = new Board(1);
-            Board p2Board = new Board(2);
+            Board p1Board = new Board(1); // la grille du joueur 1
+            Board p2Board = new Board(2); // la grille du joueur 2
             GameManager.setBoardJ1(p1Board);
             for (int ligne = 0; ligne < 10; ligne++)
             {
                 for (int colonne = 0; colonne < 10; colonne++)
                 {
-                    p2Board.SeaElementList.ElementAt(ligne * 10 + colonne).known = false;
+                    p2Board.SeaElementList.ElementAt(ligne * 10 + colonne).known = false; // on ne connait pas les cases de l'adversaire au début
                 }
             }
             GameManager.setBoardJ2(p2Board);
 
-            foreach (SeaElement seaelement in p1Board.SeaElementList)
+            foreach (SeaElement seaelement in p1Board.SeaElementList) // affichage de la grille du joueur 1
             {
                 NavalBattleD.Children.Add(seaelement.button);
             }
-            foreach (SeaElement seaelement in p2Board.SeaElementList)
+            foreach (SeaElement seaelement in p2Board.SeaElementList) // affichage de la grille du joueur 2
             {
                 NavalBattleD.Children.Add(seaelement.button);
             }

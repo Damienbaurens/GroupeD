@@ -17,24 +17,24 @@ namespace GroupeDNavalBattle
         {
             List<SeaElement> elementPlayer = boardOpponent.SeaElementList;
 
-            SeaElement shootable = ButtonBuffer.getPressedSeaElement();
+            SeaElement shootable = ButtonBuffer.getPressedSeaElement(); // case ayant été cliquée
             if (shootable == null) return null;
             if (shootable.button.Name[1] != '2') return null;
 
             if (opponent.id == 2)
             {
                 ButtonBuffer.setPressedSeaElement(null);
-                shootable.known = true;
+                shootable.known = true; // on révèle la case
                 if (shootable.state == State.Water)
                 {
-                    shootable.state = State.Plouf;
+                    shootable.state = State.Plouf; // raté !
                 }
                 if (shootable.state == State.Boat)
                 {
                     for (int nboat = 0; nboat < opponent.boatList.Length; nboat++)
                     {
                         {
-                            Boat currentBoat = opponent.boatList[nboat];
+                            Boat currentBoat = opponent.boatList[nboat]; // on recherche le bateau à qui appartient la case que l'on a touchée
                             for (int element = 0; element < currentBoat.size; element++)
                             {
                                 if ((shootable.posX == currentBoat.position[element].posX) && (shootable.posY == currentBoat.position[element].posY))
@@ -42,15 +42,15 @@ namespace GroupeDNavalBattle
                                     int pv = currentBoat.Life();
                                     if (pv > 1)
                                     {
-                                        shootable.state = State.Touched;
+                                        shootable.state = State.Touched; // touché !
                                     }
                                     else
                                     {
                                         for (int element2 = 0; element2 < currentBoat.size; element2++)
                                         {
-                                            currentBoat.position[element2].state = State.Sunk;
+                                            currentBoat.position[element2].state = State.Sunk; // si le bateau est coulé, on change tous ses éléments en "Sunk"
                                         }
-                                        shootable.state = State.Sunk;
+                                        shootable.state = State.Sunk; // coulé! 
                                     }
 
                                 }
@@ -68,13 +68,13 @@ namespace GroupeDNavalBattle
             int nboat = GameManager.getnBoatsToPlace()-1;
             int element = GameManager.getElement();
 
-            Boat currentBoat = this.boatList[nboat];
-            SeaElement target = ButtonBuffer.getPressedSeaElement();
+            Boat currentBoat = this.boatList[nboat]; // bateau que l'on place
+            SeaElement target = ButtonBuffer.getPressedSeaElement(); // case où on veut placer le bateau
             if (target == null) return null;
             if (target.button.Name[1] != '1') return null;
             if (target.state != State.Water) return null;
 
-            int[,] listInterdit= new int[10,10];// liste d'élément inclickable strictement
+            int[,] listInterdit= new int[10,10];// liste d'élément incliquables
             for (int ligne = 0; ligne < 10; ligne++)
             {
                 for (int colonne = 0; colonne < 10; colonne++)
@@ -191,7 +191,7 @@ namespace GroupeDNavalBattle
 
             if (element == 0)
             {
-                //rendre la case inclicable liste
+                // on rend inclicables toutes les cases sauf celles où on peut continuer le placement du bateau
                 for (int ligne = 0; ligne < 10; ligne++)
                 {
                     for (int colonne = 0; colonne < 10; colonne++)
@@ -234,7 +234,7 @@ namespace GroupeDNavalBattle
                 {
                     for (int colonne = 1; colonne < 11; colonne++)
                     {
-                        //rendre tous les élements clickables
+                        //rendre tous les élements cliquables
                         board.SeaElementList.ElementAt((colonne - 1) * 10 + (ligne - 1)).clickable = true;
                     }
                 }
@@ -250,7 +250,7 @@ namespace GroupeDNavalBattle
                 }
                 if (Horizontal)
                 {
-                    //quand on pose le 2nd élement on enlève les case clicable de l'autre sens 
+                    //quand on pose le 2nd élement on enlève les case cliquable de l'autre sens 
                     if (element == 1)
                     {
                         if (y0 > 0)
@@ -262,7 +262,7 @@ namespace GroupeDNavalBattle
                             board.SeaElementList.ElementAt((x0) * 10 + (y0 + 1)).clickable = false;
                         }
                     }
-                    // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
+                    // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends cliquables
                     if (x > 0)
                     {
                         if (listInterdit[x-1, y] != 1)
@@ -281,7 +281,7 @@ namespace GroupeDNavalBattle
                 }
                 else
                 {
-                    //quand on pose le 2nd élement on enlève les case clicable de l'autre sens 
+                    //quand on pose le 2nd élement on enlève les case cliquable de l'autre sens 
                     if (element == 1)
                     {
                         if (x0 > 0)
@@ -293,7 +293,7 @@ namespace GroupeDNavalBattle
                             board.SeaElementList.ElementAt((x0 + 1) * 10 + (y0)).clickable = false;
                         }
                     }
-                    // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends clicable
+                    // après avoir verifié que les prochaines cases existaient et qu'on pouvait y mettre un élément ont les rends cliquables
                     if (y > 0)
                     {
                         if (listInterdit[x, y-1] != 1)

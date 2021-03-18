@@ -8,7 +8,7 @@ namespace GroupeDNavalBattle
 {
     static class ButtonBuffer
     {
-        private static SeaElement pressedSeaElement;
+        private static SeaElement pressedSeaElement; // on garde en mémoire la dernière case cliquée
 
         public static SeaElement getPressedSeaElement()
         {

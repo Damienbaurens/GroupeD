@@ -68,7 +68,7 @@ namespace GroupeDNavalBattle
                     // puis configurez la nouvelle page en transmettant les informations requises en tant que
                     // paramètre
 
-                    Boat[] p1Boats = new Boat[6];
+                    Boat[] p1Boats = new Boat[6]; // la liste des bateaux du joueur 1 (humain)
                     p1Boats[0] = new Boat(2);
                     p1Boats[1] = new Boat(3);
                     p1Boats[2] = new Boat(3);
@@ -78,7 +78,7 @@ namespace GroupeDNavalBattle
                     GameManager.setnBoatsToPlace(p1Boats.Length);
                     GameManager.setElement(0);
 
-                    Boat[] p2Boats = new Boat[6];
+                    Boat[] p2Boats = new Boat[6]; // la liste des bateaux du joueur 2 (ordinateur)
                     p2Boats[0] = new Boat(2);
                     p2Boats[1] = new Boat(3);
                     p2Boats[2] = new Boat(3);
@@ -86,11 +86,12 @@ namespace GroupeDNavalBattle
                     p2Boats[4] = new Boat(4);
                     p2Boats[5] = new Boat(5);
 
+                    //on initialise la partie
                     HumanPlayer p1 = new HumanPlayer(1, p1Boats);
                     GameManager.setJ1(p1);
                     Computer p2 = new Computer(2, p2Boats);
                     GameManager.setJ2(p2);
-                    GameManager.setGameState("place");
+                    GameManager.setGameState("place"); // l'état du jeu est "place" car on place ses bateaux
                     rootFrame.Navigate(typeof(MainPage));
                 }
                 // Vérifiez que la fenêtre actuelle est active

@@ -8,14 +8,17 @@ namespace GroupeDNavalBattle
 {
     public class Boat
     {
-        public int size;
-        public SeaElement [] position;
+        // Attributs
+        public int size; // la taille du bateau
+        public SeaElement [] position; // tableau contenant les cases où se trouve chaque élément du bateau
+        // Constructeur
         public Boat(int size)
         {
             this.size = size;
             this.position = new SeaElement[size];
         }
-        public int Life()
+        // Méthodes
+        public int Life() // Méthode renvoyant les points de vie restants du bateau
         {
             int touch = 0;
             for (int element=0; element<position.Length; element++)
