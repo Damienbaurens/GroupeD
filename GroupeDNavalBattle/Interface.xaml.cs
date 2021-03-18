@@ -45,6 +45,8 @@ namespace GroupeDNavalBattle
             {
                 NavalBattleD.Children.Add(seaelement.button);
             }
+            TextBlock winnerTextBlock = new TextBlock();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

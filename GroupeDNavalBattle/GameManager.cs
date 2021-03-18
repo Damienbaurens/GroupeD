@@ -105,17 +105,20 @@ namespace GroupeDNavalBattle
             }
             else if (gameState == "shoot")
             {
-                while (J1.shoot(J2, boardJ2)==null) { }
-                if (checkFinshed())
-                { 
-                    gameState = "finished";
-                    winner = J1;
-                }
-                while (J2.shoot(J1, boardJ1)==null) { }
-                if (checkFinshed())
+                if (J1.shoot(J2, boardJ2) != null)
                 {
-                    gameState = "finished";
-                    winner = J2;
+                    if (checkFinshed()) // on regarde si le joueur 1 a fini la partie
+                    {
+                        gameState = "finished";
+                        winner = J1;
+                        
+                    }
+                    while (J2.shoot(J1, boardJ1) == null) { }
+                    if (checkFinshed()) // on regarde si le joueur 2 a fini la partie
+                    {
+                        gameState = "finished";
+                        winner = J2;
+                    }
                 }
             }
         }
