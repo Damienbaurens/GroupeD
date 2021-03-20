@@ -18,13 +18,7 @@
                     <GradientStop Color="#FF1B3276" Offset="0.666"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Grid>
-                <Button x:Name="Size5BoatPlacementButton" Content="Taille 5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,135,5,505" Background="#FF041C8B"/>
-                <Button x:Name="Size4BoatPlacementButton" Content="Taille 4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,240,5,400" Background="#FF041C8B"/>
-                <Button x:Name="Size3BoatPlacementButton" Content="Taille 3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,345,5,295" Background="#FF041C8B"/>
-                <Button x:Name="Size2BoatPlacementButton" Content="Taille 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,450,5,190" Background="#FF041C8B"/>
-                <Button x:Name="Annuler" Content="Annuler" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,555,5,85" Background="#FF3D3D3E"/>
-            </Grid>
+            <Grid/>
 
 
         </Border>
@@ -53,7 +47,6 @@
                     <GradientStop Color="#FF081356" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <TextBlock x:Name="Information" Text="" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
         <Border x:Name="P1ABorder" BorderThickness="1,0,1,1" BorderBrush="Black" Background="#FF134F10" Margin="100,85,1130,585">

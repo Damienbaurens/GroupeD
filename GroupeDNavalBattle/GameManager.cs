@@ -121,6 +121,7 @@ namespace GroupeDNavalBattle
                     {
                         gameState = "finished";
                         winner = J1;
+                        
                     }
                     while (J2.shoot(J1, boardJ1) == null) { }
                     if (checkFinshed()) // on regarde si le joueur 2 a fini la partie
